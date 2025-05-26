@@ -7,6 +7,8 @@ from tensorflow.keras.applications import MobileNetV2
 from tensorflow.keras import regularizers
 from PIL import Image
 import io
+import os
+
 import base64
 from flask_cors import CORS
 
@@ -32,7 +34,15 @@ def load_trained_model():
     model.compile(optimizer='adam', loss='binary_crossentropy', metrics=['accuracy'])
     
 
-    model.load_weights(r'D:\website-project\MLopsWeb\backend\MobileNetV2_Full_weight.h5')
+    # Get the path to the current file's directory
+    BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+
+    # Join with the model filename
+    MODEL_PATH = os.path.join(BASE_DIR, 'MobileNetV2_Full_weight.h5')
+
+    # Load model weights
+    model.load_weights(MODEL_PATH)
+
     return model
 
 
