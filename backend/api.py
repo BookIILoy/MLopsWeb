@@ -53,6 +53,7 @@ def predict_image(img, model):
     prediction = model.predict(img_array)
     return prediction
 
+model = load_trained_model()  # Load the trained model
 app = Flask(__name__)  
 CORS(app, origins="*", methods=["OPTIONS", "POST", "PATCH", "GET", "PUT", "DELETE"], supports_credentials=True)
 
@@ -69,7 +70,6 @@ def upload_image():
         img_bytes = file.read()
         img = Image.open(io.BytesIO(img_bytes)).convert('RGB')  # ensure 3 channels
 
-        model = load_trained_model()  # Load the trained model
         prediction = predict_image(img, model)
         print(prediction[0])
         return jsonify({
