@@ -28,7 +28,7 @@ export default function Home() {
         });
 
         try {
-            const response = await fetch("http://localhost:5000/predict", {
+            const response = await fetch("https://mlopsweb.onrender.com/predict", {
                 method: "POST",
                 body: formData,
             });
